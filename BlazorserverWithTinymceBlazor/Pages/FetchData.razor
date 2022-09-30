@@ -2,6 +2,7 @@
 @using BlazorserverWithTinymceBlazor.Data
 
 @using TinyMCE.Blazor
+@using Microsoft.JSInterop
 
 @inject WeatherForecastService ForecastService
 
@@ -40,7 +41,7 @@ else
     </table>
 }
 
-<TinyMCE.Blazor.Editor @bind-Text=content />
+<TinyMCE.Blazor.Editor @bind-Text=content @bind-value:event="onchange"/>
 
 <textarea @bind=content @bind:event="oninput"></textarea>
 
@@ -54,6 +55,13 @@ else
 
 
     private string content = "";
+
+
+ 
+    public void onchange()
+    {
+      
+    }
 
 }
 
