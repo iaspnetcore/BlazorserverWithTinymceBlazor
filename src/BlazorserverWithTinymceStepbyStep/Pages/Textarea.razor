@@ -1,9 +1,21 @@
 ﻿@page "/Textarea"
 
+@inject IJSRuntime JSRuntime;
+
 <h3>Textarea</h3>
 
-<textarea id="Blazorservertinymce">Hello, World!</textarea>
+<textarea id="Blazorservertinymce1">Hello, World!</textarea>
+
+<textarea id="Blazorservertinymce"  @bind=content @bind:event="oninput"></textarea>
 
 @code {
+
+    private string content = "<p>Hello world</p>";
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await Interop.InitializeTextEditor(JSRuntime, DotNetObjectReference.Create(this), Id, BlazeditorOption, nameof(OnChangeCallback));
+    }
 
 }
