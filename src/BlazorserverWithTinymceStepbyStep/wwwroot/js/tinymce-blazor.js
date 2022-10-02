@@ -2,7 +2,7 @@ console.log('loading js tinymce-blazor');
 
 
 
-window.blazeditorInit = function (id, option, callback) {
+window.blazeditorInit = function () {
     var html = document.getElementById(id).innerHTML;
 
     function setup(ed) {
@@ -38,7 +38,11 @@ window.blazeditorInit = function (id, option, callback) {
         config.inline = true;
     }
 
-    tinymce.init(config);
+   
+
+   return tinymce.init({
+        selector: '#Blazorservertinymce'
+    });
 }
 
 
