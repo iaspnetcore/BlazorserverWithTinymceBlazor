@@ -9,9 +9,9 @@ namespace BlazorserverWithTinymceStepbyStep
 
         public static ValueTask<object> InitializeTextEditor(IJSRuntime jSRuntime)
         {
-           var id = jSRuntime.InvokeAsync<object>( "blazeditorInit" );
+           var idrrr = jSRuntime.InvokeAsync<object>( "blazeditorInit" );
 
-            return id;
+            return idrrr;
 
         }
 
