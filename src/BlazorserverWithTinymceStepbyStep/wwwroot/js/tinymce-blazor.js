@@ -41,7 +41,7 @@ window.blazeditorInit = function () {
    
 
    return tinymce.init({
-       selector: 'Blazorservertinymce'
+       selector: '#Blazorservertinymce'
     });
 }
 
