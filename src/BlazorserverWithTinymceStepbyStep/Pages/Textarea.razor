@@ -6,7 +6,7 @@
 
 <textarea id="Blazorservertinymce1">Hello, World!</textarea>
 
-@*<textarea id="Blazorservertinymce"  @bind=content @bind:event="oninput"></textarea>*@
+<textarea id="Blazorservertinymce"  @bind=content @bind:event="oninput"></textarea>
 
 @*<textarea id="Blazorservertinymce" @bind=content></textarea>*@
 
@@ -19,7 +19,15 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await Interop.InitializeTextEditor(JSRuntime);
+       // await Interop.InitializeTextEditor(JSRuntime);
+
+        if (firstRender)
+        {
+           
+       
+            await JSRuntime.InvokeVoidAsync("blazeditorInit");
+          //  _initialized = true;
+        }
     }
 
 }
