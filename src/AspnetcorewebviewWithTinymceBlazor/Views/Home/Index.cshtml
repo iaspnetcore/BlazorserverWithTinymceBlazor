@@ -11,10 +11,13 @@
 <div id="tinymcedemo">
 </div>
 
-//come from :https://juejin.cn/post/7133392287463112735
+<button onclick="content()">Get content</button>
+
+
+// come from :https://juejin.cn/post/7133392287463112735
 <script>
     var vmindexapp = new Vue({
-        el: '#indexapp',
+        el: '#tinymcedemo',
         data: {
             search: null,
             loading: true,
@@ -33,6 +36,16 @@
                 })
             }
         }
-    })</script>
+    })
+</script>
+
+@*JavaScript 获取 内容方式：*@
+<script>
+    var vmind = document.getElementById("searchTxt").value;
+
+    function content() {
+        alert(tinymce.activeEditor.getContent());
+    }
+</script>
 
 
