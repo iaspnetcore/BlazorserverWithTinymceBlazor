@@ -6,27 +6,57 @@
 
 <textarea id="Blazorservertinymce1">Hello, World!</textarea>
 
-<textarea id="Blazorservertinymce"  @bind=content @bind:event="oninput"></textarea>
+
+
+<div class="row">
+    <div class="col-3">
+    ooo
+    
+    </div>
+
+
+    <div class="col-9">
+        <textarea id="Blazorservertinymce" class="form-control"
+                  @bind-value="Body"
+                  @bind-value:event="oninput">
+        </textarea>
+    </div>
+
+
+
+</div>
 
 @*<textarea id="Blazorservertinymce" @bind=content></textarea>*@
 
 <div id="Blazorservertinymce"></div>
 
+
+
+<div class="col-6">
+    @Body
+</div>
+
+
 @code {
 
-    private string content = "<p>Hello world  come from code</p>";
+
+
+    //private string content = "<p>Hello world  come from code</p>";
+    public string Body { get; set; } = "<p>Hello world  come from code</p>";
 
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-       // await Interop.InitializeTextEditor(JSRuntime);
+        // await Interop.InitializeTextEditor(JSRuntime);
 
+
+        //come from https://github.com/tinymce/tinymce-blazor/blob/master/TinyMCE.Blazor/Editor.razor
         if (firstRender)
         {
-           
-       
+
+
             await JSRuntime.InvokeVoidAsync("blazeditorInit");
-          //  _initialized = true;
+            //  _initialized = true;
         }
     }
 
