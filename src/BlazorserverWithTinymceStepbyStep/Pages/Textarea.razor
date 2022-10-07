@@ -16,13 +16,16 @@
 
 
     <div class="col-9">
-        <textarea id="Blazorservertinymce" class="form-control"
-                  @bind-value="Body"
-                  @bind-value:event="oninput">
-        </textarea>
+      @*  <textarea id="Blazorservertinymce" class="form-control"
+                  @bind=Body
+                  @bind:event="onchange" >
+        </textarea>*@
     </div>
 
-
+    <textarea id="Blazorservertinymce"  class="form-control"
+              @bind-value="Body"
+              @bind-value:event="oninput">
+        </textarea>
 
 </div>
 
@@ -58,6 +61,22 @@
             await JSRuntime.InvokeVoidAsync("blazeditorInit");
             //  _initialized = true;
         }
+    }
+
+      //By default, hooked up with TinyMce's oninput event;
+  
+
+  [JSInvokable("OnInput")]
+  public void OnInput()
+  {
+       // Body = value;
+  }
+
+
+    [JSInvokable("textArea_OnChange")]
+    public void Change(string value)
+    {
+        Body = value;
     }
 
 }
