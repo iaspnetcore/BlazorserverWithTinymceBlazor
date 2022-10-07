@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorserverWithTinymceBlaz
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorserverWithTinymceStepbyStep", "src\BlazorserverWithTinymceStepbyStep\BlazorserverWithTinymceStepbyStep.csproj", "{FCAF78E5-C178-46A9-AB5D-CAD95A351E19}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspnetcorewebviewWithTinymceBlazor", "src\AspnetcorewebviewWithTinymceBlazor\AspnetcorewebviewWithTinymceBlazor.csproj", "{A547EF64-39D0-4B1C-BFAD-CEB9841910F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FCAF78E5-C178-46A9-AB5D-CAD95A351E19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCAF78E5-C178-46A9-AB5D-CAD95A351E19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCAF78E5-C178-46A9-AB5D-CAD95A351E19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A547EF64-39D0-4B1C-BFAD-CEB9841910F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A547EF64-39D0-4B1C-BFAD-CEB9841910F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A547EF64-39D0-4B1C-BFAD-CEB9841910F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A547EF64-39D0-4B1C-BFAD-CEB9841910F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

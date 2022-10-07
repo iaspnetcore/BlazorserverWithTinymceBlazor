@@ -6,3 +6,33 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+<div id="tinymcedemo">
+</div>
+
+//come from :https://juejin.cn/post/7133392287463112735
+<script>
+    var vmindexapp = new Vue({
+        el: '#indexapp',
+        data: {
+            search: null,
+            loading: true,
+            errors: null,
+        },
+        mounted() {
+            this.init();
+        },
+        //ready: function () {
+        //    this.getCustomers()
+        //},
+        methods: {
+            init() {
+                window.tinymce.init({
+                    selector: "#tinymcedemo"
+                })
+            }
+        }
+    })</script>
+
+
