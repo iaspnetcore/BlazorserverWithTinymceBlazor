@@ -39,7 +39,9 @@
         methods: {
             init() {
                 window.tinymce.init({
-                    selector: "#tinymcedemo"
+                    selector: "#tinymcedemo",
+                    plugins: 'toc',
+                    toolbar: 'toc',
                 })
             }
         }

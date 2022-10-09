@@ -18,4 +18,24 @@
 
 	});
 
+
+	
+
+
+	$("#mceinserttoc-btn").on("click", function (e) {
+
+		tinymce.activeEditor.execCommand('mceInsertToc');
+
+	});
+
+	$("#mceupdatetoc-btn").on("click", function (e) {
+
+		tinymce.activeEditor.execCommand('mceUpdateToc');
+
+	});
+
+
+	
+	
+
 });

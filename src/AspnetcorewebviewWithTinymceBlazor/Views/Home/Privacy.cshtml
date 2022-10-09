@@ -17,6 +17,11 @@
 
 <button id="set-data-btn">Set Data</button>
 
+<button id="mceinserttoc-btn">mceInsertToc-btn</button>
+
+<button id="mceupdatetoc-btn">mceUpdateToc-btn</button>
+
+
 <form id="form-data" method="post">
 
     <textarea class="tinymce" id="texteditor"></textarea>
@@ -30,7 +35,11 @@
 <script>
     tinymce.init({
         /* selector: 'textarea#Blazorservertinymce'*/
-        selector: '#texteditor'
+        selector: '#texteditor',
+        plugins: [ //配置插件：填写要使用的插件名称，可自己随意选择，但如果是上传本地图片image和imagetools是必要的
+            'link media image codesample code paste textcolor toc'
+        ],
+        toolbar: 'undo redo |  code codesample |toc link image | paste | bold |  formatselect | forecolor backcolor emoticons',
     });
 </script>
 
