@@ -16,7 +16,7 @@
 
 // come from :https://juejin.cn/post/7133392287463112735
 <script>
-     var app = new Vue({
+    var app = new Vue({
         el: '#tinymcedemo',
         data: {
             search: null,
@@ -24,10 +24,23 @@
             errors: null,
         },
 
-        // https://dustinpfister.github.io/2019/11/11/vuejs-lifecycle-updated/
-        //
-        updated: function () {
+        // 获取iframe的Document 对象
+        get iframeDocument() {
+            const iframe = (document.querySelector('#tinymce_ifr'))
+            const iframeDoc = iframe.contentDocument.querySelector('#tinymce')
+            return iframeDoc
+        },
+
+
+
+            // https://dustinpfister.github.io/2019/11/11/vuejs-lifecycle-updated/
+            //
+            updated: function () {
             //this.figure()
+
+            //只有data里的变量改变并且要在页面重新渲染完成之后,才会进updated生命周期，只改变data里的值但是没有再页面上渲染该值的话并不会触发updated方法。
+
+            console.log('updated')
         },
 
         mounted() {
@@ -44,6 +57,8 @@
                     toolbar: 'toc',
                 })
             }
+      
+        
         }
     })
 </script>
