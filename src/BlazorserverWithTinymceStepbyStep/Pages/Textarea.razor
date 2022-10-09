@@ -10,19 +10,19 @@
 
 <div class="row">
     <div class="col-3">
-    ooo
-    
+        ooo
+
     </div>
 
 
     <div class="col-9">
-      @*  <textarea id="Blazorservertinymce" class="form-control"
-                  @bind=Body
-                  @bind:event="onchange" >
+        @*  <textarea id="Blazorservertinymce" class="form-control"
+        @bind=Body
+        @bind:event="onchange" >
         </textarea>*@
     </div>
 
-    <textarea id="Blazorservertinymce"  class="form-control"
+    <textarea id="Blazorservertinymce" class="form-control"
               @bind-value="Body"
               @bind-value:event="oninput">
         </textarea>
@@ -38,6 +38,10 @@
 <div class="col-6">
     @Body
 </div>
+
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
 
 
 @code {
@@ -63,20 +67,30 @@
         }
     }
 
-      //By default, hooked up with TinyMce's oninput event;
-  
+    //By default, hooked up with TinyMce's oninput event;
 
-  [JSInvokable("OnInput")]
-  public void OnInput()
-  {
-       // Body = value;
-  }
+
+
+
+    [JSInvokable("OnInput")]
+    public void OnInput()
+    {
+        // Body = value;
+    }
 
 
     [JSInvokable("textArea_OnChange")]
     public void Change(string value)
     {
         Body = value;
+    }
+
+
+
+    private  async Task IncrementCount()
+    {
+        
+        Body= await JSRuntime.InvokeVoidAsync("blazeditorInit");
     }
 
 }

@@ -3,4 +3,39 @@
 }
 <h1>@ViewData["Title"]</h1>
 
+@section header
+    {
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+}
+
 <p>Use this page to detail your site's privacy policy.</p>
+
+@*https://dyclassroom.com/tinymce/how-to-set-data-to-tinymce-text-editor*@
+
+<button id="set-data-btn">Set Data</button>
+
+<form id="form-data" method="post">
+
+    <textarea class="tinymce" id="texteditor"></textarea>
+    <input type="submit" value="View Data">
+
+</form>
+
+<div id="data-container">
+</div>
+
+<script>
+    tinymce.init({
+        /* selector: 'textarea#Blazorservertinymce'*/
+        selector: '#texteditor'
+    });
+</script>
+
+ 
+
+
+
+<script type="text/javascript" src="/js/setdata.js"></script>

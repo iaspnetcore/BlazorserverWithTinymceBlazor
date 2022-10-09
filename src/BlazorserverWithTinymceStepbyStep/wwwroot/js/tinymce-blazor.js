@@ -54,4 +54,12 @@ window.blazeditorgetContent= function () {
     return content;
 }
 
+window.blazeditormceInsertToc = function () {
+    const content = tinymce.activeEditor.execCommand('mceInsertToc');
+
+    return content;
+}
+
+
+
 

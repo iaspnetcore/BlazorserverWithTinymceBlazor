@@ -4,7 +4,7 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="/Index">building Index+vue2</a>.</p>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
 
@@ -16,20 +16,13 @@
 
 // come from :https://juejin.cn/post/7133392287463112735
 <script>
-     var app = new Vue({
+    var vmindexapp = new Vue({
         el: '#tinymcedemo',
         data: {
             search: null,
             loading: true,
             errors: null,
         },
-
-        // https://dustinpfister.github.io/2019/11/11/vuejs-lifecycle-updated/
-        //
-        updated: function () {
-            //this.figure()
-        },
-
         mounted() {
             this.init();
         },
