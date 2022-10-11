@@ -40,6 +40,23 @@
             'link media image codesample code paste textcolor toc'
         ],
         toolbar: 'undo redo |  code codesample |toc link image | paste | bold |  formatselect | forecolor backcolor emoticons',
+
+        init_instance_callback: (editor) => {
+
+
+            editor.on('ExecCommand', (e) => {
+
+                if (e.command === 'formatselect') {
+                    alert('formatselect');
+                }
+                var content = tinyMCE.activeEditor.getContent();
+                $('#fang_content_temp').val(content);
+            });
+
+        }
+
+
+
     });
 </script>
 
@@ -59,13 +76,13 @@
 
     //需要window.onload，等iframe加载完毕后再获取
     window.onload = function () {
-      
+
 
         let ifr = document.querySelector("iframe");
 
         console.log('1.ifr', ifr); //run ok
 
-       
+
 
 
         console.log('2.ifr', ifr.contentDocument);   //获取#document 即html  runok
