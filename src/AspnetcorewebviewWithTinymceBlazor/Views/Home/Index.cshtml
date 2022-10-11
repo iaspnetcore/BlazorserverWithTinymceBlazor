@@ -2,6 +2,16 @@
     ViewData["Title"] = "Home Page";
 }
 
+
+@section header
+    {
+
+    <script src="/lib/tinymce_5.1.6/js/tinymce/tinymce.min.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+}
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="/Index">building Index+vue2</a>.</p>
@@ -13,29 +23,28 @@
 
 <button onclick="content()">Get content</button>
 
+<div>
+    <p>这里是生成的最终HTML</p>
+</div>
+<textarea id="html-content" cols="30" rows="10" v-model="html"></textarea>
+
 
 // come from :https://juejin.cn/post/7133392287463112735
 <script>
     var app = new Vue({
         el: '#tinymcedemo',
         data: {
-            search: null,
-            loading: true,
-            errors: null,
-        },
-
-        // 获取iframe的Document 对象
-        get iframeDocument() {
-            const iframe = (document.querySelector('#tinymce_ifr'))
-            const iframeDoc = iframe.contentDocument.querySelector('#tinymce')
-            return iframeDoc
+            text: "",
+            html: "777",
         },
 
 
 
-            // https://dustinpfister.github.io/2019/11/11/vuejs-lifecycle-updated/
-            //
-            updated: function () {
+
+
+        // https://dustinpfister.github.io/2019/11/11/vuejs-lifecycle-updated/
+        //
+        updated: function () {
             //this.figure()
 
             //只有data里的变量改变并且要在页面重新渲染完成之后,才会进updated生命周期，只改变data里的值但是没有再页面上渲染该值的话并不会触发updated方法。
@@ -43,12 +52,36 @@
             console.log('updated')
         },
 
+        //Vue尚完成挂载
         mounted() {
             this.init();
+            this.iframeDocument();
         },
         //ready: function () {
         //    this.getCustomers()
         //},
+
+        // 监听text变量
+        watch: {
+            text: function (newValue) {
+                let iframeWindow = document.querySelector("#tinymcedemo-ifr").contentWindow;
+
+                console.log('updated')
+
+                //let config = {
+                //    text: this.text
+                //};
+
+                //iframeWindow.setConfig(config);
+                //this.html = iframeWindow.getHtml(`window.baseConfig = ${JSON.stringify(config)};`);
+            },
+
+    //        作者：jc_FREE
+    //链接：https://juejin.cn/post/6844903716038901774
+    //            来源：稀土掘金
+    //著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
         methods: {
             init() {
                 window.tinymce.init({
@@ -56,9 +89,47 @@
                     plugins: 'toc',
                     toolbar: 'toc',
                 })
-            }
-      
-        
+            },
+
+
+
+            // 获取iframe的Document 对象
+            iframeDocument() {
+
+
+
+                
+    
+
+                var i = document.getElementById("tinymcedemo");
+
+                console.log('get tinymcedemo=', tinymcedemo);
+
+                i.onload = function () {
+                    console.log("i.contentDocument",i.contentDocument)
+                    console.log(i.contentWindow.document.getElementById("text").innerHTML)
+                }
+
+
+
+                //在获取dom之前需要先确定iframe是否加载完成--里就拿到了iframe的对象
+
+                let iframe = (document.querySelector('#tinymcedemo_ifr'))
+
+                console.log('get iframe #tinymce_ifr=', iframe)
+
+
+                //这里就拿到了iframe的window对象
+
+                //let iframeWindow = iframe.contentWindow
+
+                //console.log('get iframeWindow =', iframeWindow)
+
+                //const iframeDoc = iframe.contentDocument.querySelector('#tinymce')
+                return i
+            },
+
+
         }
     })
 </script>
@@ -66,6 +137,14 @@
 @*JavaScript 获取 内容方式：*@
 <script>
     var vmind = document.getElementById("searchTxt").value;
+
+    //    /*获取iframe中class为textLayer的div*/
+    //this.textlayer = that.iframeWin.$('.textLayer')
+    ///*获取鼠标在此iframe中的选中的文字*/
+    //var selection_text = this.iframeWin.window.getSelection().toString();
+    //————————————————
+    //版权声明：本文为CSDN博主「沙雕在人间」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+    //原文链接：https://blog.csdn.net/simple_smile1208/article/details/119423065
 
     function content() {
         alert(tinymce.activeEditor.getContent());

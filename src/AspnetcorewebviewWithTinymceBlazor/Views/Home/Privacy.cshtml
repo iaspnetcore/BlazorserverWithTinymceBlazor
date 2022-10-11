@@ -5,7 +5,7 @@
 
 @section header
     {
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script src="/lib/tinymce_5.1.6/js/tinymce/tinymce.min.js"></script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -43,23 +43,85 @@
     });
 </script>
 
-<script>
 
-    const iframe = (document.querySelector('#texteditor_ifr'))
-
-    console.log('var iframe =:', iframe)
-
-    const iframeDoc = iframe.contentDocument.querySelector('#tinymce')
-
-    
-    console.log('iframe')
-
-</script>
 
 @*作者：MZL
 链接：https://juejin.cn/post/6868554933365374989
 来源：稀土掘金
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 *@
+
+@*因为iframe加载是需要时间的，还没加载完就在js中直接获取对象了，所以获取为空。
+
+解决方法：在onload中进行。*@
+
+<script>
+
+    //需要window.onload，等iframe加载完毕后再获取
+    window.onload = function () {
+      
+
+        let ifr = document.querySelector("iframe");
+
+        console.log('1.ifr', ifr); //run ok
+
+       
+
+
+        console.log('2.ifr', ifr.contentDocument);   //获取#document 即html  runok
+
+
+        const iframeDoc1 = ifr.contentDocument.querySelector('#tinymce');
+
+        console.log('3.ifr', iframeDoc1);
+
+        // ifr.contentDocument 获取的是iframe中的document
+        let ddd = ifr.contentDocument.querySelector('#tinymce');
+
+        console.log('ddd', ddd);
+
+
+
+
+    }
+</script>
+
+<script>
+
+    const iframe = (document.querySelector('#texteditor_ifr'))
+
+
+
+    console.log('var iframe =:', iframe)
+
+    var iframe2 = document.getElementById('texteditor_ifr').contentWindow.document;
+
+    console.log('var iframe2 =:', iframe2)
+
+    const iframeDoc = iframe.contentDocument.querySelector('#tinymce')
+
+
+    console.log('iframe')
+
+</script>
+
+<script type="text/javascript">
+    var destination = document.querySelector("#texteditor_ifr");
+
+
+
+    console.log('destination', destination);
+
+    let element = document.querySelector("#texteditor");  //run ok
+    console.log('element', element);
+
+</script>
+
+
+
+</script>
+@*————————————————
+版权声明：本文为CSDN博主「夕灬颜」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_43332570/article/details/107118579*@
 
 <script type="text/javascript" src="/js/setdata.js"></script>
