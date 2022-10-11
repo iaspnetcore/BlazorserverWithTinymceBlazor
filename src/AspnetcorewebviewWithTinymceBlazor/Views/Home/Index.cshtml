@@ -36,6 +36,7 @@
         data: {
             text: "",
             html: "777",
+            iframeDocument:null
         },
 
 
@@ -50,6 +51,9 @@
         },
 
         created: function () {
+
+            // 页面加载时判断frameObj是否加载
+
 
             window.onload = () => {
                 // do something
@@ -71,6 +75,11 @@
                 // ifr.contentDocument 获取的是iframe中的document
                 let ddd = ifr.contentDocument.querySelector('#tinymce');
 
+
+                const iframeDoc = ifr.contentDocument.querySelector('#tinymce');
+
+                const iframeDocument = ifr.contentDocument.querySelector('#tinymce');
+
                 console.log('ddd', ddd);
 
             }
@@ -90,6 +99,10 @@
             //只有data里的变量改变并且要在页面重新渲染完成之后,才会进updated生命周期，只改变data里的值但是没有再页面上渲染该值的话并不会触发updated方法。
 
             console.log('updated')
+
+            console.log('updated', this.iframeDocument)
+
+            
         },
 
         //Vue尚完成挂载
