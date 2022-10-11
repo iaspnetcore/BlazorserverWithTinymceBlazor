@@ -194,7 +194,69 @@
 
 
             mutationObserverInstall: function () {
-               
+
+                const list = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6']
+                let catalogList = []
+
+                this.observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation: any) => {
+                        // console.log('mutation', mutation)
+                        // 过滤出 h1-h6
+                        const childrens = _.filter(mutation.target.children, item => _.includes(list, item.nodeName))
+                        // 移除 h1-h6 中的一个
+                        const removedNodes = _.some(mutation.removedNodes, item => _.includes(list, item.nodeName))
+
+                        // childrens.length > 1 ,此时会全量更新h1-h6的节点
+                        if (!_.isEmpty(mutation.addedNodes) && !_.isEmpty(childrens)) {
+                            // 先清空
+                            catalogList = []
+                            console.log('childrens', childrens)
+
+                            // 给元素添加自定义属性
+                            _.forEach(childrens, child => {
+                                const foundName = _.find(child.attributes, { name: 'catalogname' })
+
+                                // 未添加自定义属性的目录
+                                if (!foundName) {
+                                    const name = `catalog_${this.catalogUniqueNumber()}`
+                                    child.setAttribute('catalogName', name)
+
+                                    catalogList.push({
+                                        catalogName: name,
+                                        nodeName: child.nodeName,
+                                        innerHTML: child.innerHTML,
+                                    })
+                                }
+                                // 已经添加了自定义属性
+                                else {
+                                    catalogList.push({
+                                        catalogName: foundName.value,
+                                        nodeName: child.nodeName,
+                                        innerHTML: child.innerHTML,
+                                    })
+                                }
+                            })
+
+                            this.$emit('showCatalog', catalogList)
+                        }
+
+                        // childrens.length = 0 , 检查到全文中没有h1-h6, 则清空目录列表
+                        if (removedNodes && _.isEmpty(childrens)) {
+                            const catalogs = this.iframeDocument.querySelectorAll('h1,h2,h3,h4,h5,h6')
+
+                            // 清空目录列表
+                            if (_.isEmpty(catalogs)) this.$emit('showCatalog', [])
+                        }
+                    })
+                })
+
+                //作者：MZL
+                //链接：https://juejin.cn/post/6868554933365374989
+                //来源：稀土掘金
+                //著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+
             },
 
         }
