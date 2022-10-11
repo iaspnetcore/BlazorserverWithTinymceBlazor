@@ -55,26 +55,14 @@
         //Vue尚完成挂载
         mounted() {
             this.init();
-            this.iframeDocument();
+            //this.iframeDocument();
         },
         //ready: function () {
         //    this.getCustomers()
         //},
 
         // 监听text变量
-        watch: {
-            text: function (newValue) {
-                let iframeWindow = document.querySelector("#tinymcedemo-ifr").contentWindow;
-
-                console.log('updated')
-
-                //let config = {
-                //    text: this.text
-                //};
-
-                //iframeWindow.setConfig(config);
-                //this.html = iframeWindow.getHtml(`window.baseConfig = ${JSON.stringify(config)};`);
-            },
+      
 
     //        作者：jc_FREE
     //链接：https://juejin.cn/post/6844903716038901774
@@ -87,47 +75,14 @@
                 window.tinymce.init({
                     selector: "#tinymcedemo",
                     plugins: 'toc',
-                    toolbar: 'toc',
+                    toolbar: 'toc |  formatselect',
                 })
             },
 
 
 
             // 获取iframe的Document 对象
-            iframeDocument() {
-
-
-
-                
-    
-
-                var i = document.getElementById("tinymcedemo");
-
-                console.log('get tinymcedemo=', tinymcedemo);
-
-                i.onload = function () {
-                    console.log("i.contentDocument",i.contentDocument)
-                    console.log(i.contentWindow.document.getElementById("text").innerHTML)
-                }
-
-
-
-                //在获取dom之前需要先确定iframe是否加载完成--里就拿到了iframe的对象
-
-                let iframe = (document.querySelector('#tinymcedemo_ifr'))
-
-                console.log('get iframe #tinymce_ifr=', iframe)
-
-
-                //这里就拿到了iframe的window对象
-
-                //let iframeWindow = iframe.contentWindow
-
-                //console.log('get iframeWindow =', iframeWindow)
-
-                //const iframeDoc = iframe.contentDocument.querySelector('#tinymce')
-                return i
-            },
+           
 
 
         }
