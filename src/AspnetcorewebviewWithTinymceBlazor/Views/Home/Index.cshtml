@@ -36,7 +36,7 @@
         data: {
             text: "",
             html: "777",
-            iframeDocument:null
+            iframeDocument: null
         },
 
 
@@ -94,7 +94,7 @@
         // https://dustinpfister.github.io/2019/11/11/vuejs-lifecycle-updated/
         //
         updated: function () {
-            //this.figure()
+
 
             //只有data里的变量改变并且要在页面重新渲染完成之后,才会进updated生命周期，只改变data里的值但是没有再页面上渲染该值的话并不会触发updated方法。
 
@@ -102,12 +102,40 @@
 
             console.log('updated', this.iframeDocument)
 
-            
+            // 配置观察选项
+            const config = {
+                // 观察 attributes 改变
+                attributes: true,
+                // 指定观察属性
+                attributeFilter: ['id'],
+                // 观察节点增删
+                childList: true,
+                // 观察文本改变
+                characterData: true,
+                // 观察子节点树
+                subtree: true
+            }
+
+            // 关闭观察器
+            this.observer.disconnect()
+            // 观察节点变化
+            this.observer.observe(this.iframeDocument, config)
+
+            //作者：MZL
+            //链接：https://juejin.cn/post/6868554933365374989
+            //来源：稀土掘金
+            //著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+
+
+
         },
 
         //Vue尚完成挂载
         mounted() {
             this.init();
+            this.mutationObserverInstall();
             //this.iframeDocument();
 
 
@@ -137,13 +165,40 @@
                 })
             },
 
+            // 生成唯一的数字
+            generateUniqueNumber: function () {
+                var num = 0
+                return function () {
+                    num += 1
+                    return num
+                }
+            },
 
+            showData: function () {
+                var _self = this;
+                $.ajax({
+                    type: 'POST',
+                    url: '/EmailAccount/List',
+                    success: function (data) {
+                        _self.message = JSON.stringify(data);
+                        _self.message2 = data.data;
+                        _self.loaded = true;
+                    }
+                });
+            },
 
             // 获取iframe的Document 对象
 
+            //监听dom节点变化函数
+            // 创建观察器
 
+
+            mutationObserverInstall: function () {
+               
+            },
 
         }
+
     })
 </script>
 
