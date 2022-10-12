@@ -54,7 +54,7 @@
             })
         },
 
-   
+
         //原文链接：https://blog.csdn.net/weixin_39270642/article/details/126528940
 
         init_instance_callback: (editor) => {
@@ -66,6 +66,10 @@
 
                 if (e.command === 'mceToggleFormat') {
                     alert('formatselect');
+
+                    var content = tinymce.get("texteditor").getContent();
+
+                    $("#data-container").html(content);
                 }
                 var content = tinyMCE.activeEditor.getContent();
                 $('#fang_content_temp').val(content);
