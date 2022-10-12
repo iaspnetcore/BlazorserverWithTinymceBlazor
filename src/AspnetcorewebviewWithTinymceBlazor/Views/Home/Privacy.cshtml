@@ -32,6 +32,10 @@
 <div id="data-container">
 </div>
 
+<div id="fang_content_temp">
+</div>
+
+
 <script>
     tinymce.init({
         /* selector: 'textarea#Blazorservertinymce'*/
@@ -41,14 +45,26 @@
         ],
         toolbar: 'undo redo |  code codesample |toc link image | paste | bold |  formatselect | forecolor backcolor emoticons',
 
+        setup: function (editor) {
+            // 富文本编辑器，内容发生变动，自动保存
+            editor.on('Change', function (e) {
+                tinymce.activeEditor.save();
+
+                console.log('tinymce.activeEditor.save()');
+            })
+        },
+
+   
+        //原文链接：https://blog.csdn.net/weixin_39270642/article/details/126528940
+
         init_instance_callback: (editor) => {
 
 
             editor.on('ExecCommand', (e) => {
 
-                alert('formatselect');
+                alert(e.command);  //mceToggleFormat
 
-                if (e.command === 'formatselect') {
+                if (e.command === 'mceToggleFormat') {
                     alert('formatselect');
                 }
                 var content = tinyMCE.activeEditor.getContent();
