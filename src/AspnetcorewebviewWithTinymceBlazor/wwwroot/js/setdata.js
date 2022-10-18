@@ -1,41 +1,35 @@
 ﻿$(document).ready(function () {
 
-	$("#form-data").submit(function (e) {
+    $("#form-data").submit(function (e) {
 
-		var content = tinymce.get("texteditor").getContent();
+        var content = tinymce.get("texteditor").getContent();
 
-		$("#data-container").html(content);
+        $("#data-container").html(content);
 
-		return false;
+        return false;
 
-	});
+    });
 
-	$("#set-data-btn").on("click", function (e) {
+    $("#set-data-btn").on("click", function (e) {
 
-		var content = "<p>Hello World</p>";
+        var content = "<p>Hello World</p>";
 
-		tinymce.get("texteditor").setContent(content);
+        tinymce.get("texteditor").setContent(content);
 
-	});
-
-
-	
+    });
 
 
-	$("#mceinserttoc-btn").on("click", function (e) {
-
-		tinymce.activeEditor.execCommand('mceInsertToc');
-
-	});
-
-	$("#mceupdatetoc-btn").on("click", function (e) {
-
-		tinymce.activeEditor.execCommand('mceUpdateToc');
-
-	});
 
 
-	
-	
 
-});
+    $("#mceinserttoc-btn").on("click", function (e) {
+
+        tinymce.activeEditor.execCommand('mceInsertToc');
+
+    });
+
+    $("#mceupdatetoc-btn").on("click", function (e) {
+
+        tinymce.activeEditor.execCommand('mceUpdateToc');
+
+    });

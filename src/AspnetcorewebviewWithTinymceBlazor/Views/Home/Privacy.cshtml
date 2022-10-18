@@ -70,9 +70,28 @@
                     var content = tinymce.get("texteditor").getContent();
 
                     $("#data-container").html(content);
+
+                    this.getcontent();
                 }
                 var content = tinyMCE.activeEditor.getContent();
                 $('#fang_content_temp').val(content);
+
+
+                //模拟出一个input用于添加本地文件
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', filetype);
+                input.click();
+                input.onchange = function () {
+                    var file = this.files[0];
+                    var xhr, formData;
+                    console.log(file.name);
+                    //TODO:这里写请求
+                };
+ 
+                //链接：https://juejin.cn/post/7133392287463112735
+              
+
             });
 
         }
@@ -81,6 +100,8 @@
 
     });
 </script>
+
+
 
 
 
@@ -110,7 +131,7 @@
         console.log('2.ifr', ifr.contentDocument);   //获取#document 即html  runok
 
 
-        const iframeDoc1 = ifr.contentDocument.querySelector('#tinymce');
+        const iframeDoc = ifr.contentDocument.querySelector('#tinymce');
 
         console.log('3.ifr', iframeDoc1);
 
@@ -162,5 +183,26 @@
 @*————————————————
 版权声明：本文为CSDN博主「夕灬颜」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
 原文链接：https://blog.csdn.net/qq_43332570/article/details/107118579*@
+
+
+<script>
+    function getcontent() {
+        var content;
+
+        var content = tinymce.get("texteditor").getContent();
+
+        const childrens = this.iframeDoc.querySelectorAll('h1,h2,h3,h4,h5,h6')
+
+        $("#data-container").html(content);
+
+       
+        console.log(content);
+
+        return false;
+    }
+</script>
+
+
+
 
 <script type="text/javascript" src="/js/setdata.js"></script>

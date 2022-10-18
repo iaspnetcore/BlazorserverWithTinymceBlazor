@@ -8,6 +8,8 @@
     <!--下载的tinyMCE-->
     <script src="/lib/tinymce_5.1.6/js/tinymce/tinymce.min.js"></script>
 
+    <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 }
@@ -17,8 +19,14 @@
     <p>Learn about <a href="/Index">building Index+vue2</a>.</p>
 </div>
 
+<div>
+    <p>FullName: {{ firstName }}</p>
+    <p>FirstName: <input type="text" v-model="firstName"></p>
+</div>
 
 <div id="tinymcedemo">
+
+   
 </div>
 
 <button onclick="content()">Get content</button>
@@ -28,15 +36,25 @@
 </div>
 <textarea id="html-content" cols="30" rows="10" v-model="html"></textarea>
 
+{{html}}
 
-// come from :https://juejin.cn/post/7133392287463112735
+
+
+
+@* come from :https://juejin.cn/post/7133392287463112735*@
+
 <script>
     var app = new Vue({
         el: '#tinymcedemo',
+       
         data: {
             text: "",
             html: "777",
-            iframeDocument: null
+            iframeDocument: null,
+
+            firstName: 'Dawei',
+            lastName: 'Lou',
+            fullName: ''
         },
 
 
@@ -132,10 +150,22 @@
 
         },
 
-        //Vue尚完成挂载
+        //https://juejin.cn/post/6844903600737484808
+        //watch的代码的效果是，当我们输入firstName后，wacth监听每次修改变化的新值，然后计算输出fullName
+        watch: {
+
+          
+            firstName(newName, oldName) 
+            {
+                this.fullName = newName + ' ' + this.lastName;
+            }
+        },
+
+
+            //Vue尚完成挂载
         mounted() {
             this.init();
-            this.mutationObserverInstall();
+           // this.mutationObserverInstall();
             //this.iframeDocument();
 
 
@@ -154,6 +184,8 @@
         //链接：https://juejin.cn/post/6844903716038901774
         //            来源：稀土掘金
         //著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
 
 
         methods: {
@@ -193,71 +225,69 @@
             // 创建观察器
 
 
-            mutationObserverInstall: function () {
+            //mutationObserverInstall: function () {
 
-                const list = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6']
-                let catalogList = []
+            //    const list = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6']
+            //    let catalogList = []
 
-                this.observer = new MutationObserver((mutations) => {
-                    mutations.forEach((mutation: any) => {
-                        // console.log('mutation', mutation)
-                        // 过滤出 h1-h6
-                        const childrens = _.filter(mutation.target.children, item => _.includes(list, item.nodeName))
-                        // 移除 h1-h6 中的一个
-                        const removedNodes = _.some(mutation.removedNodes, item => _.includes(list, item.nodeName))
+            //    this.observer = new MutationObserver((mutations) => {
+            //        mutations.forEach((mutation: any) => {
+            //            // console.log('mutation', mutation)
+            //            // 过滤出 h1-h6
+            //            const childrens = _.filter(mutation.target.children, item => _.includes(list, item.nodeName))
+            //            // 移除 h1-h6 中的一个
+            //            const removedNodes = _.some(mutation.removedNodes, item => _.includes(list, item.nodeName))
 
-                        // childrens.length > 1 ,此时会全量更新h1-h6的节点
-                        if (!_.isEmpty(mutation.addedNodes) && !_.isEmpty(childrens)) {
-                            // 先清空
-                            catalogList = []
-                            console.log('childrens', childrens)
+            //            // childrens.length > 1 ,此时会全量更新h1-h6的节点
+            //            if (!_.isEmpty(mutation.addedNodes) && !_.isEmpty(childrens)) {
+            //                // 先清空
+            //                catalogList = []
+            //                console.log('childrens', childrens)
 
-                            // 给元素添加自定义属性
-                            _.forEach(childrens, child => {
-                                const foundName = _.find(child.attributes, { name: 'catalogname' })
+            //                // 给元素添加自定义属性
+            //                _.forEach(childrens, child => {
+            //                    const foundName = _.find(child.attributes, { name: 'catalogname' })
 
-                                // 未添加自定义属性的目录
-                                if (!foundName) {
-                                    const name = `catalog_${this.catalogUniqueNumber()}`
-                                    child.setAttribute('catalogName', name)
+            //                    // 未添加自定义属性的目录
+            //                    if (!foundName) {
+            //                        const name = `catalog_${this.catalogUniqueNumber()}`
+            //                        child.setAttribute('catalogName', name)
 
-                                    catalogList.push({
-                                        catalogName: name,
-                                        nodeName: child.nodeName,
-                                        innerHTML: child.innerHTML,
-                                    })
-                                }
-                                // 已经添加了自定义属性
-                                else {
-                                    catalogList.push({
-                                        catalogName: foundName.value,
-                                        nodeName: child.nodeName,
-                                        innerHTML: child.innerHTML,
-                                    })
-                                }
-                            })
+            //                        catalogList.push({
+            //                            catalogName: name,
+            //                            nodeName: child.nodeName,
+            //                            innerHTML: child.innerHTML,
+            //                        })
+            //                    }
+            //                    // 已经添加了自定义属性
+            //                    else {
+            //                        catalogList.push({
+            //                            catalogName: foundName.value,
+            //                            nodeName: child.nodeName,
+            //                            innerHTML: child.innerHTML,
+            //                        })
+            //                    }
+            //                })
 
-                            this.$emit('showCatalog', catalogList)
-                        }
+            //                this.$emit('showCatalog', catalogList)
+            //            }
 
-                        // childrens.length = 0 , 检查到全文中没有h1-h6, 则清空目录列表
-                        if (removedNodes && _.isEmpty(childrens)) {
-                            const catalogs = this.iframeDocument.querySelectorAll('h1,h2,h3,h4,h5,h6')
+            //            // childrens.length = 0 , 检查到全文中没有h1-h6, 则清空目录列表
+            //            if (removedNodes && _.isEmpty(childrens)) {
+            //                const catalogs = this.iframeDocument.querySelectorAll('h1,h2,h3,h4,h5,h6')
 
-                            // 清空目录列表
-                            if (_.isEmpty(catalogs)) this.$emit('showCatalog', [])
-                        }
-                    })
-                })
+            //                // 清空目录列表
+            //                if (_.isEmpty(catalogs)) this.$emit('showCatalog', [])
+            //            }
+            //        })
+            //    })
 
-                //作者：MZL
-                //链接：https://juejin.cn/post/6868554933365374989
-                //来源：稀土掘金
-                //著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+            //    //作者：MZL
+            //    //链接：https://juejin.cn/post/6868554933365374989
+            //    //来源：稀土掘金
+            //    //著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
-
-
-            },
+            //},
 
         }
 
@@ -266,7 +296,7 @@
 
 @*JavaScript 获取 内容方式：*@
 <script>
-    var vmind = document.getElementById("searchTxt").value;
+    var vmind = document.getElementById("searchTxt");
 
     //    /*获取iframe中class为textLayer的div*/
     //this.textlayer = that.iframeWin.$('.textLayer')
