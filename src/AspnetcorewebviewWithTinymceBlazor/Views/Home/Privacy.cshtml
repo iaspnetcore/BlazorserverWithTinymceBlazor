@@ -22,6 +22,19 @@
 <button id="mceupdatetoc-btn">mceUpdateToc-btn</button>
 
 
+<script language="javascript">
+
+    function Foo() {
+        //do something
+
+        tinymce.activeEditor.setContent("H1");
+    }
+
+</script>
+
+<a href="javascript:Foo();">H1</a>
+
+
 <form id="form-data" method="post">
 
     <textarea class="tinymce" id="texteditor"></textarea>
@@ -88,9 +101,9 @@
                     console.log(file.name);
                     //TODO:这里写请求
                 };
- 
+
                 //链接：https://juejin.cn/post/7133392287463112735
-              
+
 
             });
 
@@ -195,13 +208,38 @@
 
         $("#data-container").html(content);
 
-       
+
         console.log(content);
 
         return false;
     }
 </script>
 
+
+<div id="demo"></div>
+<input type="text" id="inp">
+<script>
+    var obj = {};
+    var demo = document.querySelector('#demo')
+    var inp = document.querySelector('#inp')
+    Object.defineProperty(obj, 'name', {
+        get: function () {
+            return val;
+        },
+        set: function (newVal) {// 当该属性被赋值的时候触发
+            inp.value = newVal;
+            demo.innerHTML = newVal;
+        }
+    })
+    inp.addEventListener('input', function (e) {
+        // 给obj的name属性赋值，进而触发该属性的set方法
+        obj.name = e.target.value;
+    });
+    obj.name = 'fei';// 在给obj设置name属性的时候，触发了set这个方法
+</script>
+————————————————
+@*版权声明：本文为CSDN博主「SongXJ--」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/SongXJ_01/article/details/118861295*@
 
 
 

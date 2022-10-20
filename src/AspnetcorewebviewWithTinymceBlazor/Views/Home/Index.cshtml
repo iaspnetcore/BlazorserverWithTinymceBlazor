@@ -19,14 +19,16 @@
     <p>Learn about <a href="/Index">building Index+vue2</a>.</p>
 </div>
 
-<div>
-    <p>FullName: {{ firstName }}</p>
-    <p>FirstName: <input type="text" v-model="firstName"></p>
-</div>
+
 
 <div id="tinymcedemo">
 
-   
+    <div>
+        <p>FullName: {{ firstName }}</p>
+        <p>FirstName: <input type="text" v-model="firstName"></p>
+    </div>
+
+
 </div>
 
 <button onclick="content()">Get content</button>
@@ -46,7 +48,7 @@
 <script>
     var app = new Vue({
         el: '#tinymcedemo',
-       
+
         data: {
             text: "",
             html: "777",
@@ -154,18 +156,17 @@
         //watch的代码的效果是，当我们输入firstName后，wacth监听每次修改变化的新值，然后计算输出fullName
         watch: {
 
-          
-            firstName(newName, oldName) 
-            {
+
+            firstName(newName, oldName) {
                 this.fullName = newName + ' ' + this.lastName;
             }
         },
 
 
-            //Vue尚完成挂载
+        //Vue尚完成挂载
         mounted() {
             this.init();
-           // this.mutationObserverInstall();
+            // this.mutationObserverInstall();
             //this.iframeDocument();
 
 
