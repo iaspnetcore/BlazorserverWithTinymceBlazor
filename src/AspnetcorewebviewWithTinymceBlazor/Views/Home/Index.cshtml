@@ -21,7 +21,22 @@
 
 
 
-<div id="tinymcedemo">
+<div id="app" class="row">
+
+    <div class="col-3">
+        ooo
+
+    </div>
+
+    <div class="col-9">
+
+        <textarea id="tinymcedemo"></textarea>
+
+
+
+    </div>
+
+
 
     <div>
         <p>FullName: {{ firstName }}</p>
@@ -29,16 +44,19 @@
     </div>
 
 
+    <div>
+        <p>这里是生成的最终HTML</p>
+    </div>
+<textarea id="html-content" cols="30" rows="10" v-model="html"></textarea>
+
+    {{html}}
+
+
 </div>
 
 <button onclick="content()">Get content</button>
 
-<div>
-    <p>这里是生成的最终HTML</p>
-</div>
-<textarea id="html-content" cols="30" rows="10" v-model="html"></textarea>
 
-{{html}}
 
 
 
@@ -47,7 +65,7 @@
 
 <script>
     var app = new Vue({
-        el: '#tinymcedemo',
+        el: '#app',
 
         data: {
             text: "",
